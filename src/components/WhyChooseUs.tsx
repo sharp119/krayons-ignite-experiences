@@ -53,7 +53,7 @@ const WhyChooseUs = () => {
   ];
 
   return (
-    <section className="py-20 bg-background">
+    <section className="py-20 bg-background relative z-10" style={{ minHeight: "100vh" }}>
       <div className="max-w-7xl mx-auto px-6">
         {/* Header with Animation */}
         <div className="text-center mb-16">
