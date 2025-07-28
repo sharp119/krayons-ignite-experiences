@@ -2,7 +2,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { ExternalLink, Calendar, MapPin, Users } from "lucide-react";
+import { ExternalLink, Calendar, MapPin, Users, Target, Lightbulb, TrendingUp, Sparkles, Award, Zap } from "lucide-react";
 import Autoplay from "embla-carousel-autoplay";
 
 const Portfolio = () => {
@@ -87,65 +87,89 @@ const Portfolio = () => {
             {caseStudies.map((study, index) => (
               <CarouselItem key={index} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/2">
                 <div className="p-1">
-                  <Card className="card-hover card-tilt shadow-card border-0 bg-card/80 backdrop-blur-sm group overflow-hidden h-full transform hover:scale-[1.02] transition-all duration-300 hover:rotate-1">
-                    <CardHeader>
-                      <div className="flex justify-between items-start mb-4">
-                        <Badge variant="secondary" className="bg-primary/10 text-primary group-hover:bg-primary/20 transition-colors">
-                          {study.category}
-                        </Badge>
-                        <Button variant="ghost" size="sm" className="p-2 hover:scale-110 transition-transform icon-bounce">
-                          <ExternalLink className="w-4 h-4" />
+                  <Card className="card-hover card-tilt shadow-glow border-0 bg-gradient-to-br from-card/90 to-card/70 backdrop-blur-lg group overflow-hidden h-full transform hover:scale-[1.02] transition-all duration-500 hover:rotate-1 relative">
+                    {/* Animated Background Pattern */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-primary opacity-10 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700" />
+                    
+                    <CardHeader className="relative z-10">
+                      <div className="flex justify-between items-start mb-6">
+                        <div className="flex items-center gap-3">
+                          <div className="p-2 rounded-xl bg-gradient-primary/10 group-hover:bg-gradient-primary/20 transition-colors">
+                            <Sparkles className="w-5 h-5 text-primary group-hover:rotate-12 transition-transform duration-300" />
+                          </div>
+                          <Badge variant="secondary" className="bg-gradient-subtle text-primary font-semibold px-3 py-1 group-hover:scale-105 transition-transform">
+                            {study.category}
+                          </Badge>
+                        </div>
+                        <Button variant="ghost" size="sm" className="p-2 hover:scale-110 hover:bg-primary/10 rounded-full transition-all duration-300 group-hover:rotate-12">
+                          <ExternalLink className="w-5 h-5 text-primary" />
                         </Button>
                       </div>
                       
-                      <CardTitle className="text-xl mb-2 group-hover:text-primary transition-colors">{study.title}</CardTitle>
-                      <CardDescription className="text-primary font-medium">
+                      <CardTitle className="text-2xl font-bold mb-3 group-hover:text-gradient transition-all duration-300 leading-tight">
+                        {study.title}
+                      </CardTitle>
+                      <CardDescription className="text-primary font-semibold text-base flex items-center gap-2">
+                        <Award className="w-4 h-4" />
                         {study.client}
                       </CardDescription>
                     </CardHeader>
                     
-                    <CardContent className="space-y-6">
-                      {/* Event Details with Hover Effects */}
-                      <div className="grid grid-cols-3 gap-4 text-sm">
-                        <div className="flex items-center space-x-2 text-muted-foreground group-hover:text-foreground transition-colors">
-                          <Users className="w-4 h-4 icon-bounce" />
-                          <span>{study.attendees}</span>
+                    <CardContent className="space-y-6 relative z-10">
+                      {/* Event Details with Enhanced Design */}
+                      <div className="grid grid-cols-3 gap-3">
+                        <div className="flex flex-col items-center p-3 rounded-xl bg-gradient-subtle/50 group-hover:bg-gradient-subtle/80 transition-colors">
+                          <Users className="w-5 h-5 text-primary mb-1 group-hover:scale-110 transition-transform" />
+                          <span className="text-sm font-semibold text-foreground">{study.attendees}</span>
                         </div>
-                        <div className="flex items-center space-x-2 text-muted-foreground group-hover:text-foreground transition-colors">
-                          <MapPin className="w-4 h-4 icon-bounce" />
-                          <span>{study.location}</span>
+                        <div className="flex flex-col items-center p-3 rounded-xl bg-gradient-subtle/50 group-hover:bg-gradient-subtle/80 transition-colors">
+                          <MapPin className="w-5 h-5 text-primary mb-1 group-hover:scale-110 transition-transform" />
+                          <span className="text-sm font-semibold text-foreground text-center">{study.location}</span>
                         </div>
-                        <div className="flex items-center space-x-2 text-muted-foreground group-hover:text-foreground transition-colors">
-                          <Calendar className="w-4 h-4 icon-bounce" />
-                          <span>{study.duration}</span>
+                        <div className="flex flex-col items-center p-3 rounded-xl bg-gradient-subtle/50 group-hover:bg-gradient-subtle/80 transition-colors">
+                          <Calendar className="w-5 h-5 text-primary mb-1 group-hover:scale-110 transition-transform" />
+                          <span className="text-sm font-semibold text-foreground">{study.duration}</span>
                         </div>
                       </div>
 
-                      {/* Challenge */}
-                      <div className="transform group-hover:translate-x-1 transition-transform">
-                        <h4 className="font-semibold text-foreground mb-2">Challenge</h4>
-                        <p className="text-muted-foreground text-sm">{study.challenge}</p>
+                      {/* Challenge with Icon */}
+                      <div className="p-4 rounded-xl bg-destructive/5 border-l-4 border-destructive/30 transform group-hover:translate-x-1 transition-transform">
+                        <div className="flex items-center gap-2 mb-2">
+                          <Target className="w-5 h-5 text-destructive" />
+                          <h4 className="font-bold text-foreground">Challenge</h4>
+                        </div>
+                        <p className="text-muted-foreground text-sm leading-relaxed">{study.challenge}</p>
                       </div>
 
-                      {/* Solution */}
-                      <div className="transform group-hover:translate-x-1 transition-transform" style={{transitionDelay: '0.1s'}}>
-                        <h4 className="font-semibold text-foreground mb-2">Our Solution</h4>
-                        <p className="text-muted-foreground text-sm">{study.solution}</p>
+                      {/* Solution with Icon */}
+                      <div className="p-4 rounded-xl bg-primary/5 border-l-4 border-primary/50 transform group-hover:translate-x-1 transition-transform" style={{transitionDelay: '0.1s'}}>
+                        <div className="flex items-center gap-2 mb-2">
+                          <Lightbulb className="w-5 h-5 text-primary" />
+                          <h4 className="font-bold text-foreground">Our Solution</h4>
+                        </div>
+                        <p className="text-muted-foreground text-sm leading-relaxed">{study.solution}</p>
                       </div>
 
-                      {/* Impact */}
-                      <div className="transform group-hover:translate-x-1 transition-transform" style={{transitionDelay: '0.2s'}}>
-                        <h4 className="font-semibold text-foreground mb-2">Impact</h4>
-                        <p className="text-sm font-medium text-primary group-hover:scale-105 transition-transform origin-left">{study.impact}</p>
+                      {/* Impact with Enhanced Styling */}
+                      <div className="p-4 rounded-xl bg-gradient-primary/10 border-l-4 border-primary transform group-hover:translate-x-1 transition-transform" style={{transitionDelay: '0.2s'}}>
+                        <div className="flex items-center gap-2 mb-2">
+                          <TrendingUp className="w-5 h-5 text-primary" />
+                          <h4 className="font-bold text-foreground">Impact</h4>
+                          <Zap className="w-4 h-4 text-primary animate-pulse" />
+                        </div>
+                        <p className="text-sm font-bold text-primary group-hover:scale-105 transition-transform origin-left leading-relaxed">
+                          {study.impact}
+                        </p>
                       </div>
 
-                      {/* Tags with Staggered Animation */}
-                      <div className="flex flex-wrap gap-2">
+                      {/* Enhanced Tags */}
+                      <div className="flex flex-wrap gap-2 pt-2">
                         {study.tags.map((tag, tagIndex) => (
                           <Badge 
                             key={tagIndex} 
                             variant="outline" 
-                            className="text-xs hover:bg-primary/10 hover:scale-105 transition-all duration-200"
+                            className="text-xs font-medium px-3 py-1 rounded-full border-primary/30 bg-gradient-primary/5 hover:bg-gradient-primary/20 hover:scale-110 hover:border-primary/60 transition-all duration-300 cursor-pointer"
                             style={{transitionDelay: `${tagIndex * 0.1}s`}}
                           >
                             {tag}
