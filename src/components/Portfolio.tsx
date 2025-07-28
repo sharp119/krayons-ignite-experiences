@@ -1,7 +1,9 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { ExternalLink, Calendar, MapPin, Users } from "lucide-react";
+import Autoplay from "embla-carousel-autoplay";
 
 const Portfolio = () => {
   const caseStudies = [
@@ -68,80 +70,97 @@ const Portfolio = () => {
           </p>
         </div>
 
-        {/* Case Studies Grid with Enhanced Animation */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {caseStudies.map((study, index) => (
-            <div key={index} className="animate-fade-in-up" style={{animationDelay: `${index * 0.2}s`}}>
-              <Card className="card-hover card-tilt shadow-card border-0 bg-card/80 backdrop-blur-sm group overflow-hidden">
-                <CardHeader>
-                  <div className="flex justify-between items-start mb-4">
-                    <Badge variant="secondary" className="bg-primary/10 text-primary group-hover:bg-primary/20 transition-colors">
-                      {study.category}
-                    </Badge>
-                    <Button variant="ghost" size="sm" className="p-2 hover:scale-110 transition-transform icon-bounce">
-                      <ExternalLink className="w-4 h-4" />
-                    </Button>
-                  </div>
-                  
-                  <CardTitle className="text-xl mb-2 group-hover:text-primary transition-colors">{study.title}</CardTitle>
-                  <CardDescription className="text-primary font-medium">
-                    {study.client}
-                  </CardDescription>
-                </CardHeader>
-                
-                <CardContent className="space-y-6">
-                  {/* Event Details with Hover Effects */}
-                  <div className="grid grid-cols-3 gap-4 text-sm">
-                    <div className="flex items-center space-x-2 text-muted-foreground group-hover:text-foreground transition-colors">
-                      <Users className="w-4 h-4 icon-bounce" />
-                      <span>{study.attendees}</span>
-                    </div>
-                    <div className="flex items-center space-x-2 text-muted-foreground group-hover:text-foreground transition-colors">
-                      <MapPin className="w-4 h-4 icon-bounce" />
-                      <span>{study.location}</span>
-                    </div>
-                    <div className="flex items-center space-x-2 text-muted-foreground group-hover:text-foreground transition-colors">
-                      <Calendar className="w-4 h-4 icon-bounce" />
-                      <span>{study.duration}</span>
-                    </div>
-                  </div>
+        {/* Curved Carousel with Auto-scroll */}
+        <Carousel
+          plugins={[
+            Autoplay({
+              delay: 4000,
+            }),
+          ]}
+          opts={{
+            align: "start",
+            loop: true,
+          }}
+          className="w-full max-w-none"
+        >
+          <CarouselContent className="-ml-2 md:-ml-4">
+            {caseStudies.map((study, index) => (
+              <CarouselItem key={index} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/2">
+                <div className="p-1">
+                  <Card className="card-hover card-tilt shadow-card border-0 bg-card/80 backdrop-blur-sm group overflow-hidden h-full transform hover:scale-[1.02] transition-all duration-300 hover:rotate-1">
+                    <CardHeader>
+                      <div className="flex justify-between items-start mb-4">
+                        <Badge variant="secondary" className="bg-primary/10 text-primary group-hover:bg-primary/20 transition-colors">
+                          {study.category}
+                        </Badge>
+                        <Button variant="ghost" size="sm" className="p-2 hover:scale-110 transition-transform icon-bounce">
+                          <ExternalLink className="w-4 h-4" />
+                        </Button>
+                      </div>
+                      
+                      <CardTitle className="text-xl mb-2 group-hover:text-primary transition-colors">{study.title}</CardTitle>
+                      <CardDescription className="text-primary font-medium">
+                        {study.client}
+                      </CardDescription>
+                    </CardHeader>
+                    
+                    <CardContent className="space-y-6">
+                      {/* Event Details with Hover Effects */}
+                      <div className="grid grid-cols-3 gap-4 text-sm">
+                        <div className="flex items-center space-x-2 text-muted-foreground group-hover:text-foreground transition-colors">
+                          <Users className="w-4 h-4 icon-bounce" />
+                          <span>{study.attendees}</span>
+                        </div>
+                        <div className="flex items-center space-x-2 text-muted-foreground group-hover:text-foreground transition-colors">
+                          <MapPin className="w-4 h-4 icon-bounce" />
+                          <span>{study.location}</span>
+                        </div>
+                        <div className="flex items-center space-x-2 text-muted-foreground group-hover:text-foreground transition-colors">
+                          <Calendar className="w-4 h-4 icon-bounce" />
+                          <span>{study.duration}</span>
+                        </div>
+                      </div>
 
-                  {/* Challenge */}
-                  <div className="transform group-hover:translate-x-1 transition-transform">
-                    <h4 className="font-semibold text-foreground mb-2">Challenge</h4>
-                    <p className="text-muted-foreground text-sm">{study.challenge}</p>
-                  </div>
+                      {/* Challenge */}
+                      <div className="transform group-hover:translate-x-1 transition-transform">
+                        <h4 className="font-semibold text-foreground mb-2">Challenge</h4>
+                        <p className="text-muted-foreground text-sm">{study.challenge}</p>
+                      </div>
 
-                  {/* Solution */}
-                  <div className="transform group-hover:translate-x-1 transition-transform" style={{transitionDelay: '0.1s'}}>
-                    <h4 className="font-semibold text-foreground mb-2">Our Solution</h4>
-                    <p className="text-muted-foreground text-sm">{study.solution}</p>
-                  </div>
+                      {/* Solution */}
+                      <div className="transform group-hover:translate-x-1 transition-transform" style={{transitionDelay: '0.1s'}}>
+                        <h4 className="font-semibold text-foreground mb-2">Our Solution</h4>
+                        <p className="text-muted-foreground text-sm">{study.solution}</p>
+                      </div>
 
-                  {/* Impact */}
-                  <div className="transform group-hover:translate-x-1 transition-transform" style={{transitionDelay: '0.2s'}}>
-                    <h4 className="font-semibold text-foreground mb-2">Impact</h4>
-                    <p className="text-sm font-medium text-primary group-hover:scale-105 transition-transform origin-left">{study.impact}</p>
-                  </div>
+                      {/* Impact */}
+                      <div className="transform group-hover:translate-x-1 transition-transform" style={{transitionDelay: '0.2s'}}>
+                        <h4 className="font-semibold text-foreground mb-2">Impact</h4>
+                        <p className="text-sm font-medium text-primary group-hover:scale-105 transition-transform origin-left">{study.impact}</p>
+                      </div>
 
-                  {/* Tags with Staggered Animation */}
-                  <div className="flex flex-wrap gap-2">
-                    {study.tags.map((tag, tagIndex) => (
-                      <Badge 
-                        key={tagIndex} 
-                        variant="outline" 
-                        className="text-xs hover:bg-primary/10 hover:scale-105 transition-all duration-200"
-                        style={{transitionDelay: `${tagIndex * 0.1}s`}}
-                      >
-                        {tag}
-                      </Badge>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          ))}
-        </div>
+                      {/* Tags with Staggered Animation */}
+                      <div className="flex flex-wrap gap-2">
+                        {study.tags.map((tag, tagIndex) => (
+                          <Badge 
+                            key={tagIndex} 
+                            variant="outline" 
+                            className="text-xs hover:bg-primary/10 hover:scale-105 transition-all duration-200"
+                            style={{transitionDelay: `${tagIndex * 0.1}s`}}
+                          >
+                            {tag}
+                          </Badge>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="hidden md:flex" />
+          <CarouselNext className="hidden md:flex" />
+        </Carousel>
 
         {/* CTA with Pulse Animation */}
         <div className="text-center mt-12 animate-fade-in-up animate-delay-600">
