@@ -1,5 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Star, Quote } from "lucide-react";
+import brandLogosCollection from "@/assets/brand-logos-collection.png";
 
 const Testimonials = () => {
   const testimonials = [
@@ -47,9 +48,23 @@ const Testimonials = () => {
     }
   ];
 
-  const clientLogos = [
-    "TechVantage", "Luxe Fashion", "GreenTech", "Global Dynamics", 
-    "EcoBeauty", "Innovation Labs", "StartupAccel", "FutureCorps"
+  const brandLogos = [
+    { name: "TechVantage Solutions", category: "Technology" },
+    { name: "Luxe Fashion International", category: "Fashion" },
+    { name: "GreenTech Innovations", category: "Sustainability" },
+    { name: "Global Dynamics Corp", category: "Corporate" },
+    { name: "EcoBeauty Brand", category: "Beauty" },
+    { name: "Innovation Labs", category: "Research" },
+    { name: "StartupAccelerator", category: "Venture Capital" },
+    { name: "FutureCorps", category: "Technology" },
+    { name: "MetaVision Inc", category: "AR/VR" },
+    { name: "CloudFirst Technologies", category: "Cloud Computing" },
+    { name: "NextGen Automotive", category: "Automotive" },
+    { name: "BioHealth Solutions", category: "Healthcare" },
+    { name: "FinanceForward", category: "FinTech" },
+    { name: "RetailRevolution", category: "E-commerce" },
+    { name: "EduTech Pioneer", category: "Education" },
+    { name: "SpaceAge Industries", category: "Aerospace" }
   ];
 
   return (
@@ -104,23 +119,73 @@ const Testimonials = () => {
           ))}
         </div>
 
-        {/* Client Logos with Animation */}
-        <div className="text-center animate-fade-in-up animate-delay-600">
-          <h3 className="text-xl font-semibold text-foreground mb-8">
-            Trusted by Leading Brands
+        {/* Three-Layer Infinite Scrolling Brand Logos */}
+        <div className="text-center animate-fade-in-up animate-delay-600 overflow-hidden">
+          <h3 className="text-2xl font-semibold text-foreground mb-12">
+            Trusted by <span className="text-gradient">Leading Brands</span>
           </h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-6 items-center">
-            {clientLogos.map((logo, index) => (
-              <div 
-                key={index} 
-                className="bg-card/50 p-4 rounded-lg shadow-sm hover:shadow-md hover:bg-card hover:scale-105 transition-all duration-300 text-center animate-scale-in"
-                style={{animationDelay: `${index * 0.1 + 0.7}s`}}
-              >
-                <div className="text-muted-foreground font-medium text-sm hover:text-foreground transition-colors">
-                  {logo}
+          
+          {/* First Row - Scroll Right */}
+          <div className="relative mb-6 overflow-hidden">
+            <div className="flex animate-scroll-right space-x-8 whitespace-nowrap">
+              {[...brandLogos.slice(0, 6), ...brandLogos.slice(0, 6)].map((brand, index) => (
+                <div 
+                  key={`row1-${index}`}
+                  className="flex-shrink-0 bg-card/60 backdrop-blur-sm px-6 py-4 rounded-xl shadow-sm hover:shadow-lg hover:bg-card hover:scale-105 transition-all duration-300 group cursor-pointer border border-border/50"
+                >
+                  <div className="text-center">
+                    <div className="text-foreground font-semibold text-lg group-hover:text-primary transition-colors">
+                      {brand.name}
+                    </div>
+                    <div className="text-xs text-muted-foreground mt-1 group-hover:text-primary/80 transition-colors">
+                      {brand.category}
+                    </div>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
+          </div>
+
+          {/* Second Row - Scroll Left */}
+          <div className="relative mb-6 overflow-hidden">
+            <div className="flex animate-scroll-left space-x-8 whitespace-nowrap">
+              {[...brandLogos.slice(6, 12), ...brandLogos.slice(6, 12)].map((brand, index) => (
+                <div 
+                  key={`row2-${index}`}
+                  className="flex-shrink-0 bg-gradient-to-r from-primary/5 to-secondary/5 backdrop-blur-sm px-6 py-4 rounded-xl shadow-sm hover:shadow-lg hover:from-primary/10 hover:to-secondary/10 hover:scale-105 transition-all duration-300 group cursor-pointer border border-primary/20"
+                >
+                  <div className="text-center">
+                    <div className="text-foreground font-semibold text-lg group-hover:text-primary transition-colors">
+                      {brand.name}
+                    </div>
+                    <div className="text-xs text-muted-foreground mt-1 group-hover:text-primary/80 transition-colors">
+                      {brand.category}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Third Row - Scroll Right (Faster) */}
+          <div className="relative overflow-hidden">
+            <div className="flex animate-scroll-right-fast space-x-8 whitespace-nowrap">
+              {[...brandLogos.slice(12, 16), ...brandLogos.slice(0, 4), ...brandLogos.slice(12, 16), ...brandLogos.slice(0, 4)].map((brand, index) => (
+                <div 
+                  key={`row3-${index}`}
+                  className="flex-shrink-0 bg-gradient-to-br from-card/80 via-card/60 to-card/40 backdrop-blur-sm px-6 py-4 rounded-xl shadow-sm hover:shadow-lg hover:from-card hover:to-card/80 hover:scale-105 transition-all duration-300 group cursor-pointer border border-border/30"
+                >
+                  <div className="text-center">
+                    <div className="text-foreground font-semibold text-lg group-hover:text-primary transition-colors">
+                      {brand.name}
+                    </div>
+                    <div className="text-xs text-muted-foreground mt-1 group-hover:text-primary/80 transition-colors">
+                      {brand.category}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 

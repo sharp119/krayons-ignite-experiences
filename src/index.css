@@ -374,4 +374,35 @@
       transform: scale(1);
     }
   }
+
+  /* Infinite Scrolling Animations for Brand Logos */
+  .animate-scroll-right {
+    animation: scrollRight 25s linear infinite;
+  }
+
+  .animate-scroll-left {
+    animation: scrollLeft 30s linear infinite;
+  }
+
+  .animate-scroll-right-fast {
+    animation: scrollRight 20s linear infinite;
+  }
+
+  @keyframes scrollRight {
+    0% {
+      transform: translateX(-50%);
+    }
+    100% {
+      transform: translateX(0%);
+    }
+  }
+
+  @keyframes scrollLeft {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
 }
